@@ -4,7 +4,7 @@ import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { GrFormSearch } from "react-icons/gr";
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 const systemMessage = {
   //  Explain things like you're talking to a software professional with 5 years of experience.
@@ -16,7 +16,7 @@ const systemMessage = {
 function Chat({ darkMode }) {
   const [messages, setMessages] = useState([
     {
-      message: "Hello, I'm ChatGPT! Ask me anything!",
+      message: "Hi, I'm ChatGPT!",
       type: "ChatGPT",
     },
   ]);
@@ -72,21 +72,31 @@ function Chat({ darkMode }) {
     >
       <ChatHeader darkMode={darkMode} />
 
-      <div 
-        className="flex flex-col overflow-y-auto max-h-[80vh]"
-      >
+      <div className="flex flex-col overflow-y-auto max-h-[80vh]">
         {messages.map((input, index) => (
           <div
             key={index}
             className={
               input.type === "user"
                 ? `bg-purple-500 text-white max-w-[50%] self-end m-2 py-[9px] px-[10px] rounded-3xl`
-                : `${darkMode ? "bg-teal-950 text-white":"bg-gray-100"} text-black max-w-[50%] self-start m-2 p-3 rounded-3xl `
+                : `${
+                    darkMode ? "bg-teal-950 text-white" : "bg-gray-100"
+                  } text-black max-w-[50%] self-start m-2 p-3 rounded-3xl `
             }
           >
             {input.message}
           </div>
         ))}
+
+        {isLoading && (
+          <div key={messages.length} >
+            <div className={`${
+                    darkMode ? "bg-teal-950 text-white" : "bg-gray-100"
+                  } text-black w-[21%] self-start m-2 p-3 rounded-3xl `}>
+              <h2>ChatGPT is generating</h2>
+            </div>
+          </div>
+        )}
       </div>
 
       <Form action="" onFinish={handleSubmit}>
@@ -101,7 +111,9 @@ function Chat({ darkMode }) {
           <Form.Item>
             <Input
               type="text"
-              className={`w-[700px] rounded-3xl mt-5 ${darkMode ? "bg-teal-950" : "bg-gray-200/70"} border-none`}
+              className={`w-[700px] rounded-3xl mt-5 ${
+                darkMode ? "bg-teal-950" : "bg-gray-200/70"
+              } border-none`}
               size="medium"
               placeholder="Type your message here"
               value={inputValue}

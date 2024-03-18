@@ -6,13 +6,6 @@ import { GrFormSearch } from "react-icons/gr";
 
 const API_KEY = "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";
 
-const systemMessage = {
-  //  Explain things like you're talking to a software professional with 5 years of experience.
-  role: "system",
-  content:
-    "Explain things like you're talking to a software professional with 2 years of experience.",
-};
-
 function Chat({ darkMode }) {
   const [messages, setMessages] = useState([
     {

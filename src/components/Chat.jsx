@@ -4,7 +4,7 @@ import { Button, Form, Input } from "antd";
 import axios from "axios";
 import { GrFormSearch } from "react-icons/gr";
 
-const API_KEY = "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";
+const API_KEY = process.env.OPENAI_API_KEY;
 
 function Chat({ darkMode }) {
   const [messages, setMessages] = useState([
@@ -44,7 +44,6 @@ function Chat({ darkMode }) {
     axios
       .post(url, data, { headers: headers })
       .then((response) => {
-        console.log(response);
         setMessages((prevChatLog) => [
           ...prevChatLog,
           { type: "bot", message: response.data.choices[0].message.content },
